@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
+import android.view.WindowManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,6 +56,8 @@ public class MainActivity extends Activity implements Delegate {
 
         FrameLayout frame = findViewById(R.id.cameraFrame);
         frame.addView(this.preview);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -144,8 +147,9 @@ public class MainActivity extends Activity implements Delegate {
         }
 
         // make name from timestamp
+        String timeStampDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator + timeStamp + ".jpg");
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator + timeStampDate + File.separator + timeStamp + ".jpg");
 
         return mediaFile;
     }
